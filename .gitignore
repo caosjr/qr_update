@@ -25,6 +25,7 @@
 # Need to keep all HDL files
 # *.vhd
 # *.v
+# 
 
 # ignore Quartus II generated files
 *_generation_script*
@@ -50,8 +51,6 @@
 *.sopc_builder
 *.summary
 *.tcl
-*.txt # Explicitly add any text files used
-*~
 *example*
 *sopc_*
 *.sdc # I want those timing files
@@ -79,3 +78,5 @@
 */timing/
 */testbench/
 */*_sim/
+*/cmake-build-debug/
+*/cmake-build-release/
