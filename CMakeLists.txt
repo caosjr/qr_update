@@ -8,3 +8,4 @@ set(CMAKE_C_FLAGS_RELEASE  "-O3 -fomit-frame-pointer -march=native -Wno-strict-a
 set(CMAKE_BUILD_TYPE_INIT "Release")
 
 add_executable(Hessenberg main.c)
+target_link_libraries(Hessenberg m)
