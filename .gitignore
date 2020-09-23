@@ -56,9 +56,7 @@
 *.sdc # I want those timing files
 .log
 *.log
-*.xml
 *.attrib
-*.txt
 *.rpt
 *.qsf
 *.orig
@@ -78,5 +76,9 @@
 */timing/
 */testbench/
 */*_sim/
-*/cmake-build-debug/
-*/cmake-build-release/
+/cmake-build-debug/**
+/cmake-build-release/**
+# Jetbrains
+**/.idea/workspace.xml
+**/.idea/tasks.xml
+**/.idea/usage.statistics.xml
