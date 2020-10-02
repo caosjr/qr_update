@@ -34,7 +34,7 @@ void rank_one_update(double *A, double *B, double *u, int *v, int n){
     int j = 0;
     while(v[j] < 1) j++;
     for (int i = 0; i < n; i++){
-        B[i*n + j] = B[i*n + j] + u[i];
+        B[i*n + j] = A[i*n + j] + u[i];
     }
 }
 
@@ -109,7 +109,8 @@ void w_calc(double *Q, double *u, double *w, int n) {
 
 void mult_mat(double *A, double *B, int n) {
     double sum = 0;
-    double C[n][n];
+    //double C[n][n];
+    double C[n];
 
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
@@ -117,16 +118,18 @@ void mult_mat(double *A, double *B, int n) {
             for (int k = 0; k < n; k++) {
                 sum = sum + A[i * n + k] * B[k * n + j];
             }
-            C[i][j] = sum;
+            C[j] = sum;
+            //C[i][j] = sum;
         }
+        memcpy(&A[i*n], C, n * sizeof(double));
     }
 
     //MELHORAR ESSA COPIA
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            A[i * n + j] = C[i][j];
-        }
-    }
+//    for (int i = 0; i < n; i++) {
+//        for (int j = 0; j < n; j++) {
+//            A[i * n + j] = C[i][j];
+//        }
+//    }
 }
 
 void qr_update(double *Q, double *R, double *u, int *v, int n) {
@@ -201,7 +204,7 @@ int main() {
 
     FILE * temp = fopen("dataUpdate.temp", "w");
     FILE * temp2 = fopen("dataQR.temp", "w");
-    FILE * gnuplotPipe = popen ("gnuplot -persistent", "w");
+    FILE * gnuplotPipe = popen ("gnuplot -persist", "w");
     char * commandsForGnuplot[] = {
             "set xrange[2:100]",
             "set yrange[0:2000]",
@@ -298,7 +301,7 @@ int main() {
     free(u);
     free(v);
 
-    fclose(gnuplotPipe);
+    pclose(gnuplotPipe);
 
     return 0;
 }
